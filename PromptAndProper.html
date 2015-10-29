@@ -1,0 +1,320 @@
+<html>
+	<head>
+		<link href='https://fonts.googleapis.com/css?family=Oswald:300|Kotta+One|Cousine' rel='stylesheet' type='text/css'>
+		<style>
+			body
+			{
+				background:                 #252535;
+				font-family:                'Oswald', sans-serif;
+				color:                      #CCC;
+				margin:                     0;
+				padding:                    5em 0 0 15em;
+				width:                      40em;
+			}
+
+			body::before
+			{
+				content:                    "";
+				position:                   absolute;
+				background:                 #333340;
+				top:                        0;
+				bottom:                     0;
+				left:                       10em;
+				width:                      50em;
+			}
+
+			.stage
+			{
+				position:                   relative;
+			}
+
+			.panel
+			{
+				background:                 #444454;
+				width:                      19.5em;
+				padding:                    0 1em 1em 1em;
+				margin-bottom:              2em;
+			}
+
+			.tokens-field
+			{
+				display:                    inline-block;
+				font-family:                'Cousine', monospace;
+				padding:                    0.5em 1em;
+				height:                     1em;
+				overflow:                   hidden;
+				white-space:                nowrap;
+				width:                      10em;
+				background:                 #282838;
+				outline:                    none;
+				margin-bottom:              2em;
+			}
+
+			.tokens-field:focus
+			{
+				background:                 #252535;
+			}
+
+			.token
+			{
+				background-color:           yellow;
+				position:                   relative;
+				display:                    inline-block;
+				text-align:                 center;
+				font-family:                "Kotta One", serif;
+				color:                      white;
+				line-height:                1em;
+				width:                      1.15em;
+				height:                     1.15em;
+				border-radius:              0.2em;
+				cursor:                     default;
+			}
+
+			/*
+
+			.token
+			{
+				background-color:           yellow;
+				position:                   relative;
+				display:                    inline-block;
+				width:                      1em;
+				height:                     1em;
+				border-radius:              0.2em;
+			}
+
+			.token::after
+			{
+				content:                    "";
+				display:                    block;
+				position:                   absolute;
+				top:                        -0.1em;
+				left:                       0;
+				width:                      100%;
+				height:                     100%;
+				text-align:                 center;
+				font-family:                "Kotta One", serif;
+				color:                      #222;
+			}
+
+			.token--bell::after                       { content: "a"; }
+			.token--date::after                       { content: "d"; }
+			.token--partial-host-name::after          { content: "h"; }
+			.token--full-host-name::after             { content: "H"; }
+			.token--suspended-processes::after        { content: "j"; }
+			.token--device-name::after                { content: "l"; }
+			.token--newline::after                    { content: "n"; }
+			.token--carriage-return::after            { content: "r"; }
+			.token--executable-name::after            { content: "s"; }
+			.token--24-hour-time::after               { content: "t"; }
+			.token--12-hour-time::after               { content: "T"; }
+			.token--period-time::after                { content: "@"; }
+			.token--user::after                       { content: "u"; }
+			.token--bash-version::after               { content: "v"; }
+			.token--bash-version-detail::after        { content: "V"; }
+			.token--working-directory::after          { content: "w"; }
+			.token--working-directory-basename::after { content: "W"; }
+			.token--command-position::after           { content: "!"; }
+			.token--command-count::after              { content: "#"; }
+			.token--root-indicator::after             { content: "a"; }
+			*/
+		</style>
+
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script>
+			(function()
+			{
+				"use script";
+
+				var tokens = {
+					bell : {
+						tooltip    : "bell"   ,
+						color      : "yellow" ,
+						textColor  : "#222"   ,
+						escapeChar : "a"
+					},
+					date : {
+						tooltip    : "bell"      ,
+						color      : "olivedrab" ,
+						escapeChar : "d"
+					},
+					partialHostName : {
+						tooltip    : "bell"       ,
+						color      : "sandybrown" ,
+						escapeChar : "h"
+					},
+					fullHostName : {
+						tooltip    : "bell"   ,
+						color      : "salmon" ,
+						escapeChar : "H"
+					},
+					suspendedProcesses : {
+						tooltip    : "bell"   ,
+						color      : "orange" ,
+						escapeChar : "j"
+					},
+					deviceName : {
+						tooltip    : "bell"    ,
+						color      : "skyblue" ,
+						escapeChar : "l"
+					},
+					newLine : {
+						tooltip    : "bell"      ,
+						color      : "steelblue" ,
+						escapeChar : "n"
+					},
+					carriageReturn : {
+						tooltip    : "bell"      ,
+						color      : "orangered" ,
+						escapeChar : "r"
+					},
+					executableName : {
+						tooltip    : "bell"      ,
+						color      : "slategrey" ,
+						escapeChar : "s"
+					},
+					time24Hour : {
+						tooltip    : "bell"     ,
+						color      : "seagreen" ,
+						escapeChar : "t"
+					},
+					time12Hour : {
+						tooltip    : "bell"           ,
+						color      : "mediumseagreen" ,
+						escapeChar : "T"
+					},
+					timePeriod : {
+						tooltip    : "bell"      ,
+						color      : "limegreen" ,
+						escapeChar : "@"
+					},
+					user : {
+						tooltip    : "bell"      ,
+						color      : "royalblue" ,
+						escapeChar : "u"
+					},
+					bashVersion : {
+						tooltip    : "bell"   ,
+						color      : "tan"    ,
+						escapeChar : "v"
+					},
+					bashVersionDetail : {
+						tooltip    : "bell"  ,
+						color      : "wheat" ,
+						escapeChar : "V"
+					},
+					workingDirectory : {
+						tooltip    : "bell"      ,
+						color      : "turquoise" ,
+						escapeChar : "w"
+					},
+					workingDirectoryBasename : {
+						tooltip    : "bell"            ,
+						color      : "mediumturquoise" ,
+						escapeChar : "W"
+					},
+					commandPosition : {
+						tooltip    : "bell"      ,
+						color      : "violetred" ,
+						escapeChar : "!"
+					},
+					commandCount : {
+						tooltip    : "bell"            ,
+						color      : "mediumvioletred" ,
+						escapeChar : "#"
+					},
+					rootIndicator : {
+						tooltip    : "bell"              ,
+						color      : "mediumspringgreen" ,
+						escapeChar : "$"
+					}
+				};
+
+				var tokensField, tokensDrawer, output;
+
+				function makeToken(tokenName)
+				{
+					var token = tokens[tokenName];
+
+					if(!token)
+						throw "No such token";
+
+					var tokenEl = $(document.createElement("span"))
+						.addClass("token")
+						.text(token.escapeChar)
+						.data("escapeChar", token.escapeChar)
+						.attr("contenteditable", "false");
+
+					if(token.color)
+						tokenEl.css("background-color", token.color);
+
+					if(token.textColor)
+						tokenEl.css("color", token.textColor)
+
+					if(token.tooltip)
+						tokenEl.attr("title", token.tooltip);
+					else
+						tokenEl.attr(tokenName);
+
+					return tokenEl;
+				}
+
+				function makeDrawerToken(tokenName)
+				{
+					return makeToken(tokenName)
+						.click(function()
+						{
+							var tokenEl = makeToken(tokenName);
+
+							tokensField.append(tokenEl);
+							tokensFieldUpdated();
+						})
+						.css({
+							"margin" : "0.5em" ,
+							"cursor" : "pointer"
+						});
+				}
+
+				function tokensFieldUpdated()
+				{
+					var str = "";
+					
+					tokensField.contents().each(function()
+					{
+						var el = $(this);
+						if(el.is(".token"))
+							str += "\\" + el.data("escapeChar");
+						else
+							str += el.text();
+
+						return str;
+					});
+
+					output.text(str);
+				}
+
+				$(function()
+				{
+
+					tokensDrawer = $(".tokens-drawer");
+					output       = $(".output");
+					tokensField  = $(".tokens-field")
+						.attr("contenteditable", "true")
+						.keyup(tokensFieldUpdated);
+
+
+					for(var t in tokens)
+					{
+						tokensDrawer.append(makeDrawerToken(t));
+					}
+				});
+			})();
+		</script>
+	</head>
+	<body>
+		<div class="stage">
+			<div class="panel tokens-drawer"><h2>Tokens</h2></div>
+			<div class="tokens-field"></div>
+			<div class="panel output"></div>
+		</div>
+	</body>
+</html>
