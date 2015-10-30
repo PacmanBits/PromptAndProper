@@ -1,0 +1,67 @@
+body
+{
+	background:                 #252535;
+	font-family:                'Oswald', sans-serif;
+	color:                      #CCC;
+	margin:                     0;
+	padding:                    5em 0 0 15em;
+	width:                      40em;
+}
+
+body::before
+{
+	content:                    "";
+	position:                   absolute;
+	background:                 #333340;
+	top:                        0;
+	bottom:                     0;
+	left:                       10em;
+	width:                      50em;
+}
+
+.stage
+{
+	position:                   relative;
+}
+
+.panel
+{
+	background:                 #444454;
+	width:                      19.5em;
+	padding:                    0 1em 1em 1em;
+	margin-bottom:              2em;
+}
+
+.tokens-field
+{
+	display:                    inline-block;
+	font-family:                'Cousine', monospace;
+	padding:                    0.5em 1em;
+	height:                     1em;
+	overflow:                   hidden;
+	white-space:                nowrap;
+	width:                      10em;
+	background:                 #282838;
+	outline:                    none;
+	margin-bottom:              2em;
+}
+
+.tokens-field:focus
+{
+	background:                 #252535;
+}
+
+.token
+{
+	background-color:           yellow;
+	position:                   relative;
+	display:                    inline-block;
+	text-align:                 center;
+	font-family:                "Kotta One", serif;
+	color:                      white;
+	line-height:                1em;
+	width:                      1.15em;
+	height:                     1.15em;
+	border-radius:              0.2em;
+	cursor:                     default;
+}
