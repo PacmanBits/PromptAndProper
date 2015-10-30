@@ -1,0 +1,30 @@
+{
+  "name": "prompt-and-proper",
+  "version": "0.0.1",
+  "description": "A tool for building UNIX prompt formats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PacmanBits/PromptAndProper.git"
+  },
+  "keywords": [
+    "UNIX",
+    "prompt",
+    "format"
+  ],
+  "author": "Sanford Gifford",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PacmanBits/PromptAndProper/issues"
+  },
+  "homepage": "https://github.com/PacmanBits/PromptAndProper#readme",
+  "dependencies": {
+    "browserify": "^12.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
