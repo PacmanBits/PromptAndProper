@@ -6,12 +6,14 @@ module.exports = function (grunt) {
       options: {
         globals: {
           console: true
-        }
+        },
+        additionalSuffixes : ['.js']
       }
     },
     browserify: {
       dev: {
         options: {
+          transform: ['reactify'],
           browserifyOptions: {
             debug: true
           }
@@ -33,13 +35,12 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-  grunt.loadNpmTasks( 'grunt-browserify'     );
-  grunt.loadNpmTasks( 'grunt-contrib-sass'   );
+  grunt.loadNpmTasks( 'grunt-jsxhint'      );
+  grunt.loadNpmTasks( 'grunt-browserify'   );
+  grunt.loadNpmTasks( 'grunt-contrib-sass' );
 
   grunt.registerTask('default', [
     'jshint', 'browserify',  // JS
     'sass'                   // CSS
   ]);
-
 };

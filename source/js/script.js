@@ -1,34 +1,12 @@
-var $         = require("jquery")    ;
-var tokenDefs = require("./token-defs") ;
+var $            = require("jquery")          ;
+var React        = require("react")           ;
+var ReactDOM     = require("react-dom")       ;
+var ReactClasses = require("./react-classes") ;
+var tokenDefs    = require("./token-defs")    ;
+
+window.React = React;
 
 var tokensField, tokensDrawer, output;
-
-function makeToken(tokenName)
-{
-	var token = tokenDefs[tokenName];
-
-	if(!token)
-		throw "No such token";
-
-	var tokenEl = $(document.createElement("span"))
-		.addClass("token")
-		.text(token.escapeChar)
-		.data("escapeChar", token.escapeChar)
-		.attr("contenteditable", "false");
-
-	if(token.color)
-		tokenEl.css("background-color", token.color);
-
-	if(token.textColor)
-		tokenEl.css("color", token.textColor);
-
-	if(token.tooltip)
-		tokenEl.attr("title", token.tooltip);
-	else
-		tokenEl.attr(tokenName);
-
-	return tokenEl;
-}
 
 function makeDrawerToken(tokenName)
 {
@@ -69,13 +47,12 @@ $(function()
 
 	tokensDrawer = $(".tokens-drawer");
 	output       = $(".output");
-	tokensField  = $(".tokens-field")
-		.attr("contenteditable", "true")
-		.keyup(tokensFieldUpdated);
+	tokensField  = $(".tokens-field");
+//		.attr("contenteditable", "true")
+//		.keyup(tokensFieldUpdated);
 
-
-	for(var t in tokenDefs)
-	{
-		tokensDrawer.append(makeDrawerToken(t));
-	}
+	ReactDOM.render(
+		React.createElement(ReactClasses.TokenDrawer, {tokens : tokenDefs}),
+		tokensDrawer[0]
+	);
 });
