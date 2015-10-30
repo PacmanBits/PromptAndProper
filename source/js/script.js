@@ -56,7 +56,9 @@ function tokensFieldUpdated()
 		if(el.is(".token"))
 			str += "\\" + el.data("escapeChar");
 		else
-			str += el.text();
+		{
+			str += el.text().replace(/\\/g, "\\\\");
+		}
 
 		return str;
 	});
