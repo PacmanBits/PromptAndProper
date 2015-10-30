@@ -1,83 +1,81 @@
-(function()
+var $         = require("jquery")    ;
+var tokenDefs = require("./token-defs") ;
+
+var tokensField, tokensDrawer, output;
+
+function makeToken(tokenName)
 {
-	"use script";
+	var token = tokenDefs[tokenName];
 
-	var tokensField, tokensDrawer, output;
+	if(!token)
+		throw "No such token";
 
-	function makeToken(tokenName)
-	{
-		var token = tokenDefs[tokenName];
+	var tokenEl = $(document.createElement("span"))
+		.addClass("token")
+		.text(token.escapeChar)
+		.data("escapeChar", token.escapeChar)
+		.attr("contenteditable", "false");
 
-		if(!token)
-			throw "No such token";
+	if(token.color)
+		tokenEl.css("background-color", token.color);
 
-		var tokenEl = $(document.createElement("span"))
-			.addClass("token")
-			.text(token.escapeChar)
-			.data("escapeChar", token.escapeChar)
-			.attr("contenteditable", "false");
+	if(token.textColor)
+		tokenEl.css("color", token.textColor);
 
-		if(token.color)
-			tokenEl.css("background-color", token.color);
+	if(token.tooltip)
+		tokenEl.attr("title", token.tooltip);
+	else
+		tokenEl.attr(tokenName);
 
-		if(token.textColor)
-			tokenEl.css("color", token.textColor)
+	return tokenEl;
+}
 
-		if(token.tooltip)
-			tokenEl.attr("title", token.tooltip);
-		else
-			tokenEl.attr(tokenName);
-
-		return tokenEl;
-	}
-
-	function makeDrawerToken(tokenName)
-	{
-		return makeToken(tokenName)
-			.click(function()
-			{
-				var tokenEl = makeToken(tokenName);
-
-				tokensField.append(tokenEl);
-				tokensFieldUpdated();
-			})
-			.css({
-				"margin" : "0.5em" ,
-				"cursor" : "pointer"
-			});
-	}
-
-	function tokensFieldUpdated()
-	{
-		var str = "";
-		
-		tokensField.contents().each(function()
+function makeDrawerToken(tokenName)
+{
+	return makeToken(tokenName)
+		.click(function()
 		{
-			var el = $(this);
-			if(el.is(".token"))
-				str += "\\" + el.data("escapeChar");
-			else
-				str += el.text();
+			var tokenEl = makeToken(tokenName);
 
-			return str;
+			tokensField.append(tokenEl);
+			tokensFieldUpdated();
+		})
+		.css({
+			"margin" : "0.5em" ,
+			"cursor" : "pointer"
 		});
+}
 
-		output.text(str);
-	}
-
-	$(function()
+function tokensFieldUpdated()
+{
+	var str = "";
+	
+	tokensField.contents().each(function()
 	{
+		var el = $(this);
+		if(el.is(".token"))
+			str += "\\" + el.data("escapeChar");
+		else
+			str += el.text();
 
-		tokensDrawer = $(".tokens-drawer");
-		output       = $(".output");
-		tokensField  = $(".tokens-field")
-			.attr("contenteditable", "true")
-			.keyup(tokensFieldUpdated);
-
-
-		for(var t in tokenDefs)
-		{
-			tokensDrawer.append(makeDrawerToken(t));
-		}
+		return str;
 	});
-})();
+
+	output.text(str);
+}
+
+$(function()
+{
+
+	tokensDrawer = $(".tokens-drawer");
+	output       = $(".output");
+	tokensField  = $(".tokens-field")
+		.attr("contenteditable", "true")
+		.keyup(tokensFieldUpdated);
+
+
+	for(var t in tokenDefs)
+	{
+		tokensDrawer.append(makeDrawerToken(t));
+	}
+});

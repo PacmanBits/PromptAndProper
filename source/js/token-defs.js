@@ -1,4 +1,4 @@
-var tokenDefs = {
+module.exports = {
 	bell : {
 		tooltip    : "bell"   ,
 		color      : "yellow" ,
