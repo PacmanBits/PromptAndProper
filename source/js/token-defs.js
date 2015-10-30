@@ -6,97 +6,97 @@ module.exports = {
 		escapeChar : "a"
 	},
 	date : {
-		tooltip    : "bell"      ,
+		tooltip    : "date"      ,
 		color      : "olivedrab" ,
 		escapeChar : "d"
 	},
 	partialHostName : {
-		tooltip    : "bell"       ,
-		color      : "sandybrown" ,
+		tooltip    : "partial host name" ,
+		color      : "sandybrown"        ,
 		escapeChar : "h"
 	},
 	fullHostName : {
-		tooltip    : "bell"   ,
-		color      : "salmon" ,
+		tooltip    : "full host name" ,
+		color      : "salmon"         ,
 		escapeChar : "H"
 	},
 	suspendedProcesses : {
-		tooltip    : "bell"   ,
-		color      : "orange" ,
+		tooltip    : "suspended processes" ,
+		color      : "orange"              ,
 		escapeChar : "j"
 	},
 	deviceName : {
-		tooltip    : "bell"    ,
-		color      : "skyblue" ,
+		tooltip    : "device name" ,
+		color      : "skyblue"     ,
 		escapeChar : "l"
 	},
 	newLine : {
-		tooltip    : "bell"      ,
+		tooltip    : "new line"  ,
 		color      : "steelblue" ,
 		escapeChar : "n"
 	},
 	carriageReturn : {
-		tooltip    : "bell"      ,
-		color      : "orangered" ,
+		tooltip    : "carriage return" ,
+		color      : "orangered"       ,
 		escapeChar : "r"
 	},
 	executableName : {
-		tooltip    : "bell"      ,
-		color      : "slategrey" ,
+		tooltip    : "executable name" ,
+		color      : "slategrey"       ,
 		escapeChar : "s"
 	},
 	time24Hour : {
-		tooltip    : "bell"     ,
-		color      : "seagreen" ,
+		tooltip    : "24-hour time" ,
+		color      : "seagreen"     ,
 		escapeChar : "t"
 	},
 	time12Hour : {
-		tooltip    : "bell"           ,
+		tooltip    : "12-hour time"   ,
 		color      : "mediumseagreen" ,
 		escapeChar : "T"
 	},
 	timePeriod : {
-		tooltip    : "bell"      ,
-		color      : "limegreen" ,
+		tooltip    : "12-hour time with AM/PM" ,
+		color      : "limegreen"               ,
 		escapeChar : "@"
 	},
 	user : {
-		tooltip    : "bell"      ,
+		tooltip    : "user"      ,
 		color      : "royalblue" ,
 		escapeChar : "u"
 	},
 	bashVersion : {
-		tooltip    : "bell"   ,
-		color      : "tan"    ,
+		tooltip    : "bash version" ,
+		color      : "tan"          ,
 		escapeChar : "v"
 	},
 	bashVersionDetail : {
-		tooltip    : "bell"  ,
-		color      : "wheat" ,
+		tooltip    : "bash version (detail)" ,
+		color      : "wheat"                 ,
 		escapeChar : "V"
 	},
 	workingDirectory : {
-		tooltip    : "bell"      ,
-		color      : "turquoise" ,
+		tooltip    : "working directory (path)" ,
+		color      : "turquoise"                ,
 		escapeChar : "w"
 	},
 	workingDirectoryBasename : {
-		tooltip    : "bell"            ,
-		color      : "mediumturquoise" ,
+		tooltip    : "working directory (basename)" ,
+		color      : "mediumturquoise"              ,
 		escapeChar : "W"
 	},
 	commandPosition : {
-		tooltip    : "bell"      ,
-		color      : "violetred" ,
+		tooltip    : "command position" ,
+		color      : "violetred"        ,
 		escapeChar : "!"
 	},
 	commandCount : {
-		tooltip    : "bell"            ,
+		tooltip    : "command count"   ,
 		color      : "mediumvioletred" ,
 		escapeChar : "#"
 	},
 	rootIndicator : {
-		tooltip    : "bell"              ,
+		tooltip    : "root indicator"    ,
 		color      : "mediumspringgreen" ,
 		escapeChar : "$"
 	}
