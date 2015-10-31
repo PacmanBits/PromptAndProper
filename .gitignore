@@ -1,5 +1,7 @@
 .sass-cache
 
+npm-debug.log
+
 node_modules/
 
 public/js/app.js
