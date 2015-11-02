@@ -1,18 +1,32 @@
 var React = require("react");
 
+var Stage = React.createClass({
+	displayName : "Stage",
+	render      : function() {
+		return (
+			<div className="stage">
+				<TokenDrawer     tokens={this.props.tokens} />
+				<PromptFormatIn                             />
+				<PromptFormatOut                            />
+			</div>
+		);
+	}
+});
+
 var Token = React.createClass({
-	displayName : 'Token',
+	displayName : "Token",
 	render      : function() {
 		var token = this.props.token;
 		return (
-			React.createElement('span',
+			React.createElement("span",
 				{
-					className : "token",
-					style     : {
+					className       : "token",
+					style           : {
 						backgroundColor : token.color     ,
 						color           : token.textColor
 					},
-					onClick   : this.props.onClick
+					contentEditable : "false",
+					onClick         : this.props.onClick
 				},
 				token.escapeChar
 			)
@@ -21,17 +35,18 @@ var Token = React.createClass({
 });
 
 var TokenInDrawer = React.createClass({
-	displayName    : 'TokenInDrawer',
+	displayName  : "TokenInDrawer",
 	clickHandler : function() {
+		//var fld = document.getElementById("PromptFormatIn");
 	},
-	render      : function() {
+	render       : function() {
 		var token = this.props.token;
 		return (<Token token={token} onClick={this.clickHandler} />);
 	}
 });
 
 var TokenDrawer = React.createClass({
-	displayName : 'TokenDrawer',
+	displayName : "TokenDrawer",
 	render      : function() {
 		var tokens = this.props.tokens.map(function(token)
 		{
@@ -39,7 +54,7 @@ var TokenDrawer = React.createClass({
 		});
 
 		return (
-			<div>
+			<div className="panel tokens-drawer">
 				<h1>Tokens</h1>
 				{tokens}
 			</div>
@@ -47,7 +62,22 @@ var TokenDrawer = React.createClass({
 	}
 });
 
+var PromptFormatIn = React.createClass({
+	displayName : "PromptFormatIn",
+	render      : function()
+	{
+		return (<div className="tokens-field" contentEditable="true"></div>);
+	}
+});
+
+var PromptFormatOut = React.createClass({
+	displayName : "PromptFormatOut",
+	render      : function()
+	{
+		return (<div className="panel output"></div>);
+	}
+});
+
 module.exports = {
-	Token       : Token       ,
-	TokenDrawer : TokenDrawer
+	Stage : Stage
 };
