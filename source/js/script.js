@@ -47,14 +47,20 @@ function tokensFieldUpdated()
 $(function()
 {
 
-	tokensDrawer = $(".tokens-drawer");
-	output       = $(".output");
-	tokensField  = $(".tokens-field");
+//	tokensDrawer = $(".tokens-drawer") ;
+//	output       = $(".output")        ;
+//	tokensField  = $(".tokens-field")  ;
 //		.attr("contenteditable", "true")
 //		.keyup(tokensFieldUpdated);
 
+//	Token           : Token           ,
+//	TokenDrawer     : TokenDrawer     ,
+//	PromptFormatIn  : PromptFormatIn  ,
+//	PromptFormatOut : PromptFormatOut
+
+
 	ReactDOM.render(
-		React.createElement(ReactClasses.TokenDrawer, {tokens : tokenDefs}),
-		tokensDrawer[0]
+		React.createElement( ReactClasses.Stage, {tokens : tokenDefs} ),
+		document.getElementById("Stage")
 	);
 });
